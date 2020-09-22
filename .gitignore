@@ -1,12 +1,12 @@
 g2.parameters_original.h
 /slices
 ._g2init.cpp
-._g2main_.cpp
-._g2model.cpp
 ._g2spectra.cpp
 ._g2functions.cpp
 ._g2functions_original.cpp
 ._g2header.h
+._g2model.cpp
+._g2main_.cpp
 ._g2model.cpp
 .gitignore
 gabe

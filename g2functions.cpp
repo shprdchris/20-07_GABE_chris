@@ -119,7 +119,7 @@ long double avgGrad(int s) //Find the average gradient energy
 					grad-=field[s][fld][i][j][k]*laplacian(field[s][fld],i,j,k);//sums the gradient energy at each point
 			}
 			else{
-				grad-=field[s][fld][i][j][k]*laplacian(field[s][fld],i,j,k);//*exp(-sqrt23*field[s][0][i][j][k])	;//sums the gradient energy at each point
+				grad-=field[s][fld][i][j][k]*laplacian(field[s][fld],i,j,k)*exp(-sqrt23*field[s][0][i][j][k])	;//sums the gradient energy at each point
 			}
         }
     }
@@ -152,7 +152,7 @@ long double avgKin(int s) //Find the average kinetic energy
 				 kin+=dfield[s][fld][i][j][k]*dfield[s][fld][i][j][k];//sums the square field derivative at every point
 		}
 		else{
-				kin+=dfield[s][fld][i][j][k]*dfield[s][fld][i][j][k];//*exp(-sqrt23*field[s][0][i][j][k]);
+				kin+=dfield[s][fld][i][j][k]*dfield[s][fld][i][j][k]*exp(-sqrt23*field[s][0][i][j][k]);
 			}
         }
 	 }
@@ -274,49 +274,49 @@ long double ddfield( int s, int fld, int i, int j, int k)//evaluates the double 
 		{
 			case 0:
 				return (laplacian(field[s][fld],i,j,k)/a[s]/a[s] - dVdf(s,fld,i,j,k) - 3.*adot[s]/a[s]*dfield[s][fld][i][j][k]
-							/*-1/sqrt(6)*exp( -sqrt23*field[s][0][i][j][k] )*(	pow(dfield[s][1][i][j][k],2)		+ pow(dfield[s][2][i][j][k],2) +  pow(dfield[s][3][i][j][k],2) + + pow(dfield[s][4][i][j][k],2) 
+							-1/sqrt(6)*exp( -sqrt23*field[s][0][i][j][k] )*(	pow(dfield[s][1][i][j][k],2)		+ pow(dfield[s][2][i][j][k],2) +  pow(dfield[s][3][i][j][k],2) + + pow(dfield[s][4][i][j][k],2) 
 																				- pow(dfdi(field[s][1],i,j,k),2)/pow(a[s],2)	- pow(dfdi(field[s][2],i,j,k),2)/pow(a[s],2) -pow(dfdi(field[s][3],i,j,k),2)/pow(a[s],2) -pow(dfdi(field[s][4],i,j,k),2)/pow(a[s],2) 
 																				- pow(dfdj(field[s][1],i,j,k),2)/pow(a[s],2)	- pow(dfdj(field[s][2],i,j,k),2)/pow(a[s],2) -pow(dfdj(field[s][3],i,j,k),2)/pow(a[s],2) -pow(dfdj(field[s][4],i,j,k),2)/pow(a[s],2)
 																				- pow(dfdk(field[s][1],i,j,k),2)/pow(a[s],2)	- pow(dfdk(field[s][2],i,j,k),2)/pow(a[s],2) -pow(dfdk(field[s][3],i,j,k),2)/pow(a[s],2) -pow(dfdk(field[s][4],i,j,k),2)/pow(a[s],2)
-																				)*/
+																				)
 																				
 						); 
 			case 1:
-				return ( laplacian(field[s][fld],i,j,k)/a[s]/a[s] - /*exp(sqrt23*field[s][0][i][j][k])* */dVdf(s,fld,i,j,k) - 3.*adot[s]/a[s]*dfield[s][fld][i][j][k]
-						/*+ sqrt23*(dfield[s][0][i][j][k]*dfield[s][fld][i][j][k]	
+				return ( laplacian(field[s][fld],i,j,k)/a[s]/a[s] - exp(sqrt23*field[s][0][i][j][k])*dVdf(s,fld,i,j,k) - 3.*adot[s]/a[s]*dfield[s][fld][i][j][k]
+						+ sqrt23*(dfield[s][0][i][j][k]*dfield[s][fld][i][j][k]	
 									-dfdi(field[s][0],i,j,k)*dfdi(field[s][fld],i,j,k)/pow(a[s],2)
 									-dfdj(field[s][0],i,j,k)*dfdj(field[s][fld],i,j,k)/pow(a[s],2)
 									-dfdk(field[s][0],i,j,k)*dfdk(field[s][fld],i,j,k)/pow(a[s],2) 
-									)*/
+									)
 									
 						);			
 			case 2:
-			return ( laplacian(field[s][fld],i,j,k)/a[s]/a[s] - /*exp(sqrt23*field[s][0][i][j][k])* */dVdf(s,fld,i,j,k) - 3.*adot[s]/a[s]*dfield[s][fld][i][j][k]
-						/*+ sqrt23*(dfield[s][0][i][j][k]*dfield[s][fld][i][j][k]	
+			return ( laplacian(field[s][fld],i,j,k)/a[s]/a[s] - exp(sqrt23*field[s][0][i][j][k])*dVdf(s,fld,i,j,k) - 3.*adot[s]/a[s]*dfield[s][fld][i][j][k]
+						+ sqrt23*(dfield[s][0][i][j][k]*dfield[s][fld][i][j][k]	
 									-dfdi(field[s][0],i,j,k)*dfdi(field[s][fld],i,j,k)/pow(a[s],2)
 									-dfdj(field[s][0],i,j,k)*dfdj(field[s][fld],i,j,k)/pow(a[s],2)
 									-dfdk(field[s][0],i,j,k)*dfdk(field[s][fld],i,j,k)/pow(a[s],2) 
-									)*/
+									)
 									
-						);		
+						);			
 			case 3:
-				return ( laplacian(field[s][fld],i,j,k)/a[s]/a[s] - /*exp(sqrt23*field[s][0][i][j][k])* */dVdf(s,fld,i,j,k) - 3.*adot[s]/a[s]*dfield[s][fld][i][j][k]
-						/*+ sqrt23*(dfield[s][0][i][j][k]*dfield[s][fld][i][j][k]	
+				return ( laplacian(field[s][fld],i,j,k)/a[s]/a[s] - exp(sqrt23*field[s][0][i][j][k])*dVdf(s,fld,i,j,k) - 3.*adot[s]/a[s]*dfield[s][fld][i][j][k]
+						+ sqrt23*(dfield[s][0][i][j][k]*dfield[s][fld][i][j][k]	
 									-dfdi(field[s][0],i,j,k)*dfdi(field[s][fld],i,j,k)/pow(a[s],2)
 									-dfdj(field[s][0],i,j,k)*dfdj(field[s][fld],i,j,k)/pow(a[s],2)
 									-dfdk(field[s][0],i,j,k)*dfdk(field[s][fld],i,j,k)/pow(a[s],2) 
-									)*/
+									)
 									
 						);		
 			case 4:
-				return ( laplacian(field[s][fld],i,j,k)/a[s]/a[s] - /*exp(sqrt23*field[s][0][i][j][k])* */dVdf(s,fld,i,j,k) - 3.*adot[s]/a[s]*dfield[s][fld][i][j][k]
-						/*+ sqrt23*(dfield[s][0][i][j][k]*dfield[s][fld][i][j][k]	
+				return ( laplacian(field[s][fld],i,j,k)/a[s]/a[s] - exp(sqrt23*field[s][0][i][j][k])*dVdf(s,fld,i,j,k) - 3.*adot[s]/a[s]*dfield[s][fld][i][j][k]
+						+ sqrt23*(dfield[s][0][i][j][k]*dfield[s][fld][i][j][k]	
 									-dfdi(field[s][0],i,j,k)*dfdi(field[s][fld],i,j,k)/pow(a[s],2)
 									-dfdj(field[s][0],i,j,k)*dfdj(field[s][fld],i,j,k)/pow(a[s],2)
 									-dfdk(field[s][0],i,j,k)*dfdk(field[s][fld],i,j,k)/pow(a[s],2) 
-									)*/
+									)
 									
-						);		
+						);			
 		}
 }
 

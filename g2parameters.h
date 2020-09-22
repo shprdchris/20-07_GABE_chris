@@ -28,8 +28,8 @@ const long double f0[num_flds]={0.176169,0.00487158, 0};
 const long double df0[num_flds]={-0.362985 ,-0.00538003 ,0}; 
 const long double kmax = 1000;
 const long double kcut =125;;
-const long double dt=   2*M_PI/kmax/100;
-const int N=16;
+const long double dt=   2*M_PI/kmax/40;
+const int N=64;
 const long double L= 2*M_PI*N/kmax;
 const long double specMod= 1;
 

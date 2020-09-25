@@ -9,3 +9,5 @@ g2.parameters_original.h
 ._g2main_.cpp
 ._g2model.cpp
 gabe
+*.o
+info.txt

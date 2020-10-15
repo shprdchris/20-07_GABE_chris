@@ -28,15 +28,12 @@ const long double f0[num_flds]={0.176169,0.00487158, 0};
 const long double df0[num_flds]={-0.362985 ,-0.00538003 ,0}; 
 const long double kmax = 1000;
 const long double kcut =125;;
-const long double dt=   2*M_PI/kmax/40;
-const int N=64;
+const long double dt=   2*M_PI/kmax/20;
+const int N=32;
 const long double L= 2*M_PI*N/kmax;
 const long double specMod= 1;
 
 const bool doGamma=false;
-//const int gamSkip=10;
-//TODO: gamma implementation looks wrong: decay rate too slow cf 1 angular mode
-//TODO: remove gamma: change all ifgammas to false, always
 
 //OTHER PARAMETERS TO MODIFY
 const long double starttime=0 ;//start time of simulationo
